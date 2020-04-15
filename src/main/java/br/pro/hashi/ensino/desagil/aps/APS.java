@@ -1,23 +1,24 @@
 package br.pro.hashi.ensino.desagil.aps;
 
-import br.pro.hashi.ensino.desagil.aps.model.CCCCalculator;
-import br.pro.hashi.ensino.desagil.aps.model.CFCCalculator;
-import br.pro.hashi.ensino.desagil.aps.model.Calculator;
+import br.pro.hashi.ensino.desagil.aps.model.*;
 import br.pro.hashi.ensino.desagil.aps.view.View;
 
 import javax.swing.*;
 import java.util.LinkedList;
 
-public class Crossover {
+public class APS {
     public static void main(String[] args) {
 
         // Constrói o modelo, que é simplesmente uma lista
         // de calculadoras. Aqui a coesão está boa: para
         // criar uma nova calculadora, basta criar a
         // respectiva classe e adicionar uma linha abaixo.
-        LinkedList<Calculator> model = new LinkedList<>();
-        model.add(new CCCCalculator());
-        model.add(new CFCCalculator());
+        LinkedList<Gate> model = new LinkedList<>();
+        model.add(new AndGate());
+        model.add(new NandGate());
+        model.add(new NotGate());
+        model.add(new OrGate());
+        model.add(new XorGate());
 
         // Constrói a visão, que também é um controlador.
         // Juntar visão e controlador prejudica a coesão,
