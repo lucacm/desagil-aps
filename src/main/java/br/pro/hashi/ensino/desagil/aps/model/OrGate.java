@@ -10,8 +10,12 @@ public class OrGate extends Gate {
         super("OR", 2);
 
         not_A = new NandGate();
+
         not_B = new NandGate();
+
         nand = new NandGate();
+        nand.connect(0, not_A);
+        nand.connect(1, not_B);
     }
 
     @Override
@@ -32,8 +36,6 @@ public class OrGate extends Gate {
             case 1:
                 not_B.connect(0, emitter);
                 not_B.connect(1, emitter);
-                nand.connect(0, not_A);
-                nand.connect(1, not_B);
                 break;
         }
     }

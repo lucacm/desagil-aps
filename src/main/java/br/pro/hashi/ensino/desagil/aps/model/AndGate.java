@@ -7,9 +7,13 @@ public class AndGate extends Gate {
 
     public AndGate() {
         super("NOT", 1);
-
+        // nand esquerdo
         nand = new NandGate();
+
+        // nand direito
         not = new NandGate();
+        not.connect(0, nand);
+        not.connect(1, nand);
     }
 
     @Override
@@ -22,15 +26,7 @@ public class AndGate extends Gate {
         if ((inputIndex != 0) && (inputIndex != 1)) {
             throw new IndexOutOfBoundsException(inputIndex);
         }
-        switch (inputIndex) {
-            case 0:
-                nand.connect(0, emitter);
-                break;
-            case 1:
-                nand.connect(1, emitter);
-                not.connect(0, nand);
-                not.connect(1, nand);
-                break;
-        }
+        nand.connect(inputIndex, emitter);
     }
 }
+
