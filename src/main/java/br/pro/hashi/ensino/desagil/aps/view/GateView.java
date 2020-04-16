@@ -14,15 +14,13 @@ import java.net.URL;
 // indicando que ela reage a eventos de interação com o mouse.
 public class GateView extends JPanel implements ActionListener {
     private final Gate gate;
-    
-    // Checkboxes
 
+    // Checkboxes
     private final JCheckBox In0Box;
     private final JCheckBox In1Box;
     private final JCheckBox OutBox;
 
-    // Switches
-
+    // Switches (atributos da classe Switch para selecionar checkboxes)
     private final Switch Switch0;
     private final Switch Switch1;
 
@@ -38,8 +36,13 @@ public class GateView extends JPanel implements ActionListener {
         JLabel InLabel = new JLabel("Entrada:");
         JLabel OutLabel = new JLabel("Saída:");
 
+        // Define o Layout à partir de setLayout para a janela de
+        // vizualização do programa que simulará as checkboxes.
+        // O parâmetro é o mesmo daclasse View.
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        // Adiciona as Labels & Checkboxs criadas anteriormente na ordem de exibição
+        // Lembrando que a classe extends de JPanel para funcionar como contêiner
         add(InLabel);
         add(In0Box);
         add(In1Box);
