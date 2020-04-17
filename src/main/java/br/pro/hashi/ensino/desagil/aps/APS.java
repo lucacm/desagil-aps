@@ -10,8 +10,8 @@ public class APS {
     public static void main(String[] args) {
 
         // Constrói o modelo, que é simplesmente uma lista
-        // de calculadoras. Aqui a coesão está boa: para
-        // criar uma nova calculadora, basta criar a
+        // de portas lógicas (gates). Aqui a coesão está boa: para
+        // criar uma nova porta, basta criar a
         // respectiva classe e adicionar uma linha abaixo.
         LinkedList<Gate> model = new LinkedList<>();
         model.add(new AndGate());

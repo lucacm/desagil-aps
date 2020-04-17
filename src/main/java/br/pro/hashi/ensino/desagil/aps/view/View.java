@@ -14,17 +14,17 @@ import java.util.LinkedList;
 public class View extends JPanel implements ActionListener {
 
     // A ideia é que essa componente gráfica mostre um menu
-    // que permite selecionar uma calculadora e também mostre
-    // a representação gráfica da calculadora atualmente
+    // que permite selecionar uma porta lógica e também mostre
+    // a representação gráfica da porta atualmente
     // selecionada. Esse menu é uma instância de JComboBox
-    // e essa representação gráfica da calculadora é uma
-    // instância da classe CalculatorView, que você já leu.
+    // e essa representação gráfica da porta lógica (gate) é uma
+    // instância da classe GateView.
     private final JComboBox<Gate> menu;
     private GateView gateView;
 
-    // O construtor recebe uma lista de calculadoras, que
+    // O construtor recebe uma lista de portas lógicas, que
     // devem ser adicionadas ao menu. O menu consegue mostrar
-    // os nomes das calculadoras graças ao método toString.
+    // os nomes das portas lógicas graças ao método toString.
     public View(LinkedList<Gate> model) {
         menu = new JComboBox<>();
         for (Gate gate : model) {
@@ -38,9 +38,9 @@ public class View extends JPanel implements ActionListener {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         // Vamos adicionar a este JPanel o menu e a representação
-        // gráfica da calculadora atualmente selecionada, que é
+        // gráfica da porta atualmente selecionada, que é
         // a primeira. Como sempre, a contagem começa de zero.
-        // A implementação de addCalculatorView está logo abaixo.
+        // A implementação de addGateView está logo abaixo.
         add(menu);
         addGateView(0);
 
@@ -55,11 +55,11 @@ public class View extends JPanel implements ActionListener {
     }
 
     // Este método é responsável por adicionar a este JPanel a
-    // representação gráfica da calculadora identificada por
+    // representação gráfica da porta lógica identificada por
     // um índice. Isso consiste em três passos simples.
     private void addGateView(int index) {
 
-        // 1. Usar o índice para pegar a calculadora do menu.
+        // 1. Usar o índice para pegar a porta do menu.
         Gate gate = menu.getItemAt(index);
 
         // 2. Construir a representação gráfica a partir dela.
@@ -74,10 +74,10 @@ public class View extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
 
-        // ...tirar a atual representação gráfica de calculadora...
+        // ...tirar a atual representação gráfica da porta lógica...
         remove(gateView);
 
-        // ...descobrir qual é o índice da calculadora selecionada...
+        // ...descobrir qual é o índice da porta selecionada...
         int index = menu.getSelectedIndex();
 
         // ...e usar o método acima para adicionar a nova.
