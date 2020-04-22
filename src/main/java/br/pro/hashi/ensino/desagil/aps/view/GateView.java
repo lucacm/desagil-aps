@@ -1,8 +1,8 @@
 package br.pro.hashi.ensino.desagil.aps.view;
 
 import br.pro.hashi.ensino.desagil.aps.model.Gate;
-import br.pro.hashi.ensino.desagil.aps.model.Switch;
 import br.pro.hashi.ensino.desagil.aps.model.Light;
+import br.pro.hashi.ensino.desagil.aps.model.Switch;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +13,6 @@ import java.awt.event.MouseListener;
 import java.net.URL;
 
 public class GateView extends FixedPanel implements ActionListener, MouseListener {
-    private final Gate gate;
 
     // Checkboxes
     private final JCheckBox In0Box;
@@ -23,10 +22,9 @@ public class GateView extends FixedPanel implements ActionListener, MouseListene
     private final Switch Switch0;
     private final Switch Switch1;
     private final Light light;
-
+    private final Image image;
     // Novos atributos necessários para esta versão da interface.
     private Color color;
-    private Image image = null;
 
     public GateView(Gate gate) {
 
@@ -34,7 +32,6 @@ public class GateView extends FixedPanel implements ActionListener, MouseListene
         // exige que uma largura e uma altura sejam fixadas.
         super(250, 120);
 
-        this.gate = gate;
         In0Box = new JCheckBox();
         In1Box = new JCheckBox();
         Switch0 = new Switch();
