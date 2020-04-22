@@ -49,6 +49,7 @@ public class GateView extends FixedPanel implements ActionListener, MouseListene
             add(In0Box, 10, 29, 20, 20);
             add(In1Box, 10, 68, 20, 20);
 
+            // Pega a imagem de cada porta para desenhar posteriormente
             String name = gate.toString() + ".png";
             URL url = getClass().getClassLoader().getResource(name);
             image = getToolkit().getImage(url);
@@ -123,9 +124,14 @@ public class GateView extends FixedPanel implements ActionListener, MouseListene
         // Descobre em qual posição o clique ocorreu.
         int x = event.getX();
         int y = event.getY();
+        int raio = 10;
+        int x_centro = 210;
+        int y_centro = 58;
 
-        // Se o clique foi dentro do quadrado colorido...
-        if (x >= 200 && x < 220 && y >= 48 && y < 68) {
+        // Fórmula da distância entre pontos:
+        // se a distancia entre o click e o centro for menor que o raio do circulo, o click foi dentro
+        // Se o clique foi dentro do circulo colorido...
+        if (Math.sqrt(Math.pow(x - x_centro, 2) + Math.pow(y - y_centro, 2)) < raio) {
 
             // só deixa alterar a cor do resultado se a saída for true
             if (light.getColor() != Color.BLACK) {
