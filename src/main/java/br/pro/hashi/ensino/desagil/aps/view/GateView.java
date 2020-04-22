@@ -32,7 +32,7 @@ public class GateView extends FixedPanel implements ActionListener, MouseListene
 
         // Como subclasse de FixedPanel, esta classe agora
         // exige que uma largura e uma altura sejam fixadas.
-        super(220, 120);
+        super(250, 120);
 
         this.gate = gate;
         In0Box = new JCheckBox();
@@ -41,14 +41,13 @@ public class GateView extends FixedPanel implements ActionListener, MouseListene
         Switch1 = new Switch();
         light = new Light(255, 0, 0);
 
-
         // Adiciona as Labels & Checkboxs criadas anteriormente na ordem de exibição
         // Lembrando que a classe extends de JPanel para funcionar como contêiner.
         if (gate.getInputSize() != 1) {
             // Painel de exibição para gates com inputSize != 1
             // Portas: AND, NAND, OR, XOR
-            add(In0Box, 10, 40, 20, 20);
-            add(In1Box, 10, 65, 20, 20);
+            add(In0Box, 10, 29, 20, 20);
+            add(In1Box, 10, 68, 20, 20);
 
             String name = gate.toString() + ".png";
             URL url = getClass().getClassLoader().getResource(name);
@@ -60,11 +59,16 @@ public class GateView extends FixedPanel implements ActionListener, MouseListene
         } else {
             // Painel de exibição para gates com inputSize = 1
             // Portas: NOT
-            add(In0Box, 10, 20, 25, 25);
+            add(In0Box, 10, 48, 20, 20);
+
+            // Pega a imagem da porta NOT
+            String name = gate.toString() + ".png";
+            URL url = getClass().getClassLoader().getResource(name);
+            image = getToolkit().getImage(url);
+
             // Adiciona ActionListener para as entradas e desabilita a edição da box de saida.
             In0Box.addActionListener(this);
         }
-
 
         // Conecta os respectivos sinais às entradas
         if (gate.getInputSize() != 1) {
@@ -73,7 +77,7 @@ public class GateView extends FixedPanel implements ActionListener, MouseListene
         } else {
             gate.connect(0, Switch0);
         }
-
+        // Conecta o gate ao receiver light
         light.connect(0, gate);
 
         addMouseListener(this);
@@ -81,9 +85,8 @@ public class GateView extends FixedPanel implements ActionListener, MouseListene
         // Atualiza a classe para uma nova iteração
         update();
     }
-    // Método update serve para atualizar o painel de
-    // seleção cada vez que o botão está selected e notSelected.
 
+    // Método update serve para atualizar a cor do painel de resposta
     private void update() {
         color = light.getColor();
         repaint();
@@ -122,13 +125,17 @@ public class GateView extends FixedPanel implements ActionListener, MouseListene
         int y = event.getY();
 
         // Se o clique foi dentro do quadrado colorido...
-        if (x >= 210 && x < 235 && y >= 311 && y < 336) {
+        if (x >= 200 && x < 220 && y >= 48 && y < 68) {
 
-            // ...então abrimos a janela seletora de cor...
-            color = JColorChooser.showDialog(this, null, color);
-
-            // ...e chamamos repaint para atualizar a tela.
-            repaint();
+            // só deixa alterar a cor do resultado se a saída for true
+            if (light.getColor() != Color.BLACK) {
+                // ...então abrimos a janela seletora de cor...
+                color = JColorChooser.showDialog(this, null, color);
+                // ...atualiza a cor da saída...
+                light.setColor(color);
+                // ...e chamamos repaint para atualizar a tela.
+                repaint();
+            }
         }
 
     }
@@ -163,11 +170,11 @@ public class GateView extends FixedPanel implements ActionListener, MouseListene
         super.paintComponent(g);
 
         // Desenha a imagem, passando sua posição e seu tamanho.
-        g.drawImage(image, 30, 10, 150, 100, this);
+        g.drawImage(image, 20, 10, 192, 96, this);
 
         // Desenha um quadrado cheio.
         g.setColor(color);
-        g.fillOval(172, 50, 25, 25);
+        g.fillOval(200, 48, 20, 20);
 
         // Linha necessária para evitar atrasos
         // de renderização em sistemas Linux.
